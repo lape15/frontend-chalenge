@@ -1,0 +1,42 @@
+{
+ 
+"users": [
+	
+		{
+		
+			"id":"xyz",
+		
+			"fname": "Jane",
+		
+			"lname": "Doe",
+		
+		"walletBalance": 38999
+		
+		},
+		
+		{
+		
+			"id":"abc",
+			
+			"fname": "John",
+			
+			"lname": "Doe",
+			
+		"walletBalance": 38959
+		
+		},
+    {
+		
+			"id":"bce",
+			
+			"fname": "Janet",
+			
+			"lname": "Dean",
+			
+		"walletBalance": 300
+		
+		}
+
+	]
+
+}
