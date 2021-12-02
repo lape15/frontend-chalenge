@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import WalletHeader from '../component/header';
@@ -48,7 +48,7 @@ export const BalanceBox = styled.div`
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-    &:hover{
+    &:hover {
       transform: scale(1.05);
     }
   }
@@ -61,18 +61,27 @@ export const Text = styled.div`
   position: relative;
 `;
 const WalletPage = () => {
-  const { users } = useSelector((state) => state.users);
+  const users = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
   useEffect(() => dispatch(doFetchUsers()), []);
-  console.log(users);
+  const [user, setUser] = useState({});
+  const [balance, setBalance] = useState(0);
+  useEffect(() => {
+    if (users.length) {
+      setBalance(users[0].walletBalance);
+      setUser(users[0]);
+    }
+  }, [users]);
+  const roundedBalance = String(balance).split('');
   return (
     <Main>
-      <WalletHeader />
+      <WalletHeader firstName={user.fname} lastName={user.lname} />
       <InfoBox>
+        {console.log({roundedBalance, users })}
         <h3 className="main_head">Wallet</h3>
         <BalanceBox>
           <Text>Available Balance:</Text>
-          <h3>&#36;100000</h3>
+          <h3>&#36;{`${roundedBalance[0]}${roundedBalance[1]}`}k</h3>
           <button>Transfer funds</button>
         </BalanceBox>
       </InfoBox>

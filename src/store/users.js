@@ -6,8 +6,8 @@ const slice = createSlice({
     users: []
   },
   reducers: {
-    fetchUsers: (state, payload) => {
-      state.users = payload;
+    fetchUsers: (state, action) => {
+      state.users = action.payload;
     }
   }
 });
