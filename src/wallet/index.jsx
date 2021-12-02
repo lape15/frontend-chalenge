@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Form from '../component/form';
 import WalletHeader from '../component/header';
+import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/users';
 
 const Main = styled.main`
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const InfoBox = styled.div`
@@ -23,6 +26,9 @@ export const InfoBox = styled.div`
     font-weight: 700;
     padding: 2px 0.75rem;
   }
+  @media (max-width: 576px) {
+    padding: 10px;
+  }
 `;
 
 export const BalanceBox = styled.div`
@@ -34,6 +40,14 @@ export const BalanceBox = styled.div`
     margin: 0 10px;
     border-radius: 2.78em;
     font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    &:hover .tooltip {
+      display: block;
+    }
   }
   & button {
     font-size: 14px;
@@ -52,6 +66,16 @@ export const BalanceBox = styled.div`
       transform: scale(1.05);
     }
   }
+  @media (max-width: 576px) {
+    & h3 {
+      font-size: 14px;
+    }
+    & button {
+      padding: 2px;
+      min-width: max-content;
+      width: max-content;
+    }
+  }
 `;
 
 export const Text = styled.div`
@@ -66,25 +90,36 @@ const WalletPage = () => {
   useEffect(() => dispatch(doFetchUsers()), []);
   const [user, setUser] = useState({});
   const [balance, setBalance] = useState(0);
+  const [transferFund, setTransferFund] = useState(false);
+
   useEffect(() => {
     if (users.length) {
       setBalance(users[0].walletBalance);
       setUser(users[0]);
     }
   }, [users]);
+
+  const showTransferForm = () => {
+    setTransferFund(true);
+  };
   const roundedBalance = String(balance).split('');
   return (
     <Main>
       <WalletHeader firstName={user.fname} lastName={user.lname} />
       <InfoBox>
-        {console.log({roundedBalance, users })}
+        {console.log({ roundedBalance, users })}
         <h3 className="main_head">Wallet</h3>
         <BalanceBox>
           <Text>Available Balance:</Text>
-          <h3>&#36;{`${roundedBalance[0]}${roundedBalance[1]}`}k</h3>
-          <button>Transfer funds</button>
+          <h3>
+            &#36;{`${roundedBalance[0]}${roundedBalance[1]}`}k
+            <Tooltip amount={user.walletBalance} />
+          </h3>
+
+          <button onClick={showTransferForm}>Transfer funds</button>
         </BalanceBox>
       </InfoBox>
+      {transferFund && <Form />}
     </Main>
   );
 };

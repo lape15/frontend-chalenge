@@ -8,6 +8,7 @@ const Header = styled.header`
   justify-content: space-between;
   background: #fff;
   box-shadow: 4px 6px 50px rgba(0, 0, 0, 0.1);
+  height: 80px;
 `;
 const NameWrapper = styled.div`
   display: flex;
