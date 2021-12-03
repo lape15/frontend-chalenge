@@ -1,6 +1,6 @@
 To run project dev dependecies must be installed
 
-// To Install dependecies:
+<!--- To Install dependecies: -->
 
 run yarn
 
@@ -16,4 +16,8 @@ Run vite dev server with command
 
 yarn dev
 
-[Link to APP](https://kudifrontend-challenge.netlify.app/)
+[Link to live app](https://kudifrontend-challenge.netlify.app/)
+
+<!--- Assumptions made -->
+
+I assumed that the currency transffered will be debited from balance in dollars.
