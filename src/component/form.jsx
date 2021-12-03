@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { doFetchConversionRate, doSaveCurrency } from '../store/users';
+import { doFetchConversionRate, doSaveCurrency } from '../store/wallet';
 import DialogBox from './dialog_box';
 import ModalComponent from './modal';
 
@@ -75,7 +75,7 @@ const FlexWrapper = styled.div`
 `;
 
 const Form = ({ showTransferForm, deductBalance }) => {
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((state) => state.wallet.users);
   const [transferInfo, setTransferInfo] = useState({
     amount: 0,
     currency: '',

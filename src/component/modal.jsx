@@ -85,39 +85,29 @@ const Modal = ({ children }) => {
   return createPortal(<ModalWrapper>{children}</ModalWrapper>, elRef.current);
 };
 
-const ModalComponent = ({ show, handlePreview, doTransfer, transferInfo, showPreview }) => {
+const ModalComponent = ({ show, handlePreview, doTransfer, transferInfo }) => {
   const modalRef = useRef(null);
 
-  //   const handleClick = useCallback(
-  //     (e) => {
-  //       if (modalRef.current.contains(e.target)) {
-  //         return;
-  //       }
-  //       if (modalRef.current && !modalRef.current.contains(e.target)) {
-  //         handlePreview(false);
-  //       }
-  //     },
-  //     [showPreview]
-  //   );
-
-  useEffect(() => {
-    const handleClick = (e) => {
+  const handleClick = useCallback(
+    (e) => {
       if (modalRef.current.contains(e.target)) {
-        console.log(e, 'hey');
         return;
       }
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        console.log(e, 'hi');
         handlePreview(false);
       }
-    };
-    if (showPreview) {
+    },
+    [handlePreview]
+  );
+
+  useEffect(() => {
+    if (show) {
       document.addEventListener('mousedown', handleClick);
     }
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }, [showPreview, handlePreview]);
+  }, [show, handleClick]);
 
   if (!show) return null;
   return (
@@ -144,8 +134,7 @@ ModalComponent.propTypes = {
   show: PropTypes.bool,
   handlePreview: PropTypes.func,
   doTransfer: PropTypes.func,
-  transferInfo: PropTypes.object,
-  showPreview: PropTypes.bool
+  transferInfo: PropTypes.object
 };
 
 export default ModalComponent;

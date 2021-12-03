@@ -13,8 +13,8 @@ const Box = styled.div`
 `;
 
 const DialogBox = () => {
-  const conversionRate = useSelector((state) => state.users.conversionRate);
-  const currency = useSelector((state) => state.users.currency);
+  const conversionRate = useSelector((state) => state.wallet.conversionRate);
+  const currency = useSelector((state) => state.wallet.currency);
   if (conversionRate !== null && currency) {
     return (
       <Box>

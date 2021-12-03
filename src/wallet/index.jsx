@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
-import { doFetchUsers } from '../store/users';
+import { doFetchUsers } from '../store/wallet';
 
 const Main = styled.main`
   width: 100%;
@@ -86,7 +86,7 @@ export const Text = styled.div`
   position: relative;
 `;
 const WalletPage = () => {
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
   useEffect(() => dispatch(doFetchUsers()), []);
   const [user, setUser] = useState({});

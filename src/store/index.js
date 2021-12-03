@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import users from './users';
+import wallet from './wallet';
 const reducer = combineReducers({
-  users
+  wallet
 });
 const store = configureStore({
   reducer
