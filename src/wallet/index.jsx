@@ -129,7 +129,13 @@ const WalletPage = () => {
           </button>
         </BalanceBox>
       </InfoBox>
-      {transferFund && <Form showTransferForm={showTransferForm} deductBalance={deductBalance} />}
+      {transferFund && (
+        <Form
+          showTransferForm={showTransferForm}
+          deductBalance={deductBalance}
+          balance={user.walletBalance}
+        />
+      )}
     </Main>
   );
 };

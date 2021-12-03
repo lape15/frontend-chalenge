@@ -79,9 +79,8 @@ const info = {
   currency: '',
   recipient: ''
 };
-const Form = ({ showTransferForm, deductBalance }) => {
+const Form = ({ showTransferForm, deductBalance, balance }) => {
   const users = useSelector((state) => state.wallet.users);
-
   const [transferInfo, setTransferInfo] = useState(info);
 
   const [showPreview, setShowPreview] = useState(false);
@@ -115,6 +114,10 @@ const Form = ({ showTransferForm, deductBalance }) => {
     for (let i = 0; i < infoKeys.length; i += 1) {
       if (!transferInfo[infoKeys[i]]) {
         setError('Field cannot be empty');
+        return;
+      }
+      if (transferInfo['amount'] >= balance) {
+        setError('Amount cannot be greater than balance');
         return;
       }
     }
@@ -194,6 +197,7 @@ const Form = ({ showTransferForm, deductBalance }) => {
 };
 Form.propTypes = {
   showTransferForm: PropTypes.func,
-  deductBalance: PropTypes.func
+  deductBalance: PropTypes.func,
+  balance: PropTypes.number
 };
 export default Form;
