@@ -9,14 +9,16 @@ import ModalComponent from './modal';
 const currencies = ['NGN', 'USD', 'EUR'];
 
 const FormWrapper = styled.form`
-  width: 500px;
+  width: 550px;
   background: white;
   border-radius: 6px;
   display: flex;
   flex-flow: column nowrap;
   padding: 20px;
   position: relative;
-  margin: 8% auto;
+  top: 8vh;
+  margin: 0;
+  margin-left: 15%;
   box-shadow: 0px 4px 25px rgba(196, 196, 196, 0.25);
   & .error {
     margin: 10px;
@@ -24,11 +26,12 @@ const FormWrapper = styled.form`
     color: red;
   }
   @media (max-width: 768px) {
-    margin: 25% auto;
+    width: 500px;
+    top: 2vh;
   }
   @media (max-width: 576px) {
     width: 100%;
-    margin: 30% auto;
+    margin: 0;
   }
 `;
 

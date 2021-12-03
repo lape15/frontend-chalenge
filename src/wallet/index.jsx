@@ -5,6 +5,7 @@ import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/wallet';
+import illus from '../assets/illus.jpg';
 
 const Main = styled.main`
   width: 100%;
@@ -90,7 +91,8 @@ const Empty = styled.div`
   width: 300px;
   padding: 20px;
   position: relative;
-  margin: 10% auto;
+  top: 20vh;
+  margin: 0 auto;
   background: white;
   border: 1px solid #00e59e;
   cursor: pointer;
@@ -109,10 +111,26 @@ const Empty = styled.div`
     text-transform: capitalize;
   }
   @media (max-width: 768px) {
-    margin: 30% auto;
+    top: 12vh;
   }
   @media (max-width: 576px) {
     width: 70%;
+  }
+`;
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  position: relative;
+  top: 10vh;
+  margin: 0 auto;
+  & .image {
+    width: 450px;
+    img {
+      width: 100%;
+    }
+    @media (max-width: 576px) {
+      display: none;
+    }
   }
 `;
 
@@ -161,17 +179,22 @@ const WalletPage = () => {
           </button>
         </BalanceBox>
       </InfoBox>
-      {transferFund ? (
-        <Form
-          showTransferForm={showTransferForm}
-          deductBalance={deductBalance}
-          balance={user.walletBalance}
-        />
-      ) : (
-        <Empty onClick={() => showTransferForm(true)}>
-          <p>Click to transfer funds</p>
-        </Empty>
-      )}
+      <Container>
+        {transferFund ? (
+          <Form
+            showTransferForm={showTransferForm}
+            deductBalance={deductBalance}
+            balance={user.walletBalance}
+          />
+        ) : (
+          <Empty onClick={() => showTransferForm(true)}>
+            <p>Click to transfer funds</p>
+          </Empty>
+        )}
+        <div className="image">
+          <img src={illus} alt="photo" />
+        </div>
+      </Container>
     </Main>
   );
 };
