@@ -74,17 +74,21 @@ const FlexWrapper = styled.div`
   }
 `;
 
+const info = {
+  amount: 0,
+  currency: '',
+  recipient: ''
+};
 const Form = ({ showTransferForm, deductBalance }) => {
   const users = useSelector((state) => state.wallet.users);
-  const [transferInfo, setTransferInfo] = useState({
-    amount: 0,
-    currency: '',
-    recipient: ''
-  });
+
+  const [transferInfo, setTransferInfo] = useState(info);
+
   const [showPreview, setShowPreview] = useState(false);
   const [error, setError] = useState('');
 
   const recipients = users.slice(1, users.length);
+
   const dispatch = useDispatch();
   useEffect(() => dispatch(doFetchConversionRate()), [dispatch]);
 
@@ -106,27 +110,19 @@ const Form = ({ showTransferForm, deductBalance }) => {
   };
   const handleTransferSubmit = (e) => {
     e.preventDefault();
-    const { amount, currency, recipient } = transferInfo;
-    if (!amount) {
-      setError('Field cannot be empty');
-      return;
-    }
-    if (!currency) {
-      setError('Field cannot be empty');
-      return;
-    }
-    if (!recipient) {
-      setError('Field cannot be empty');
-      return;
+    const infoKeys = Object.keys(transferInfo);
+
+    for (let i = 0; i < infoKeys.length; i += 1) {
+      if (!transferInfo[infoKeys[i]]) {
+        setError('Field cannot be empty');
+        return;
+      }
     }
     handlePreview(true);
   };
+
   const resetTransferInfo = () => {
-    setTransferInfo({
-      amount: 0,
-      currency: '',
-      recipient: ''
-    });
+    setTransferInfo(info);
   };
 
   const doTransfer = () => {
@@ -172,7 +168,7 @@ const Form = ({ showTransferForm, deductBalance }) => {
             name="recipient"
             onChange={handleInfoChange}
             required>
-            <option defaultValue="Select recipient">Select currency</option>
+            <option defaultValue="Select recipient">Select recipient</option>
             {recipients.map((recipient) => (
               <option value={`${recipient.fname} ${recipient.lname}`} key={recipient.id}>
                 {recipient.fname}

@@ -88,7 +88,7 @@ export const Text = styled.div`
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(doFetchUsers()), []);
+  useEffect(() => dispatch(doFetchUsers()), [dispatch]);
   const [user, setUser] = useState({});
   const [balance, setBalance] = useState(0);
   const [transferFund, setTransferFund] = useState(false);
@@ -124,7 +124,9 @@ const WalletPage = () => {
             <Tooltip amount={user.walletBalance} />
           </h3>
 
-          <button onClick={() => showTransferForm(true)}>Transfer funds</button>
+          <button onClick={() => showTransferForm(true)} disabled={transferFund}>
+            Transfer funds
+          </button>
         </BalanceBox>
       </InfoBox>
       {transferFund && <Form showTransferForm={showTransferForm} deductBalance={deductBalance} />}
