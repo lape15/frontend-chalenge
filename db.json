@@ -44,7 +44,7 @@
 			
 		"lname": "Weasley",
 			
-		"walletBalance": 36000,
+		"walletBalance": 36000
 		
 		},
 		{
@@ -71,6 +71,12 @@
 			"id":"ome",
 			"fname": "bud",
 			"lname": "Sola",
+			"walletBalance": 34500
+		},
+		{
+			"id":"ned",
+			"fname": "Lape",
+			"lname": "Akin",
 			"walletBalance": 34500
 		}
 	]
