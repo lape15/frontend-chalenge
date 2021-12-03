@@ -4,11 +4,11 @@
 	
 		{
 		
-			"id":"xyz",
+		"id":"xyz",
 		
-			"fname": "Jane",
+	 	"fname": "Jane",
 		
-			"lname": "Doe",
+		"lname": "Doe",
 		
 		"walletBalance": 38999
 		
@@ -16,27 +16,63 @@
 		
 		{
 		
-			"id":"abc",
+		"id":"abc",
 			
-			"fname": "John",
+		"fname": "John",
 			
-			"lname": "Doe",
+		"lname": "Doe",
 			
 		"walletBalance": 38959
 		
 		},
     {
 		
-			"id":"bce",
+		"id":"bce",
 			
-			"fname": "Janet",
+		"fname": "Janet",
 			
-			"lname": "Dean",
+		"lname": "Dean",
 			
-		"walletBalance": 300
+		"walletBalance": 46450
 		
-		}
+		},
+		{
+		
+		"id":"zde",
+			
+		"fname": "Ron",
+			
+		"lname": "Weasley",
+			
+		"walletBalance": 36000,
+		
+		},
+		{
+		"id":"feg",
+		"fname": "Femi",
+		"lname": "Adebayo",
+		"walletBalance": 3200
+		},
 
+		{
+			"id":"dfg",
+			"fname": "Erin",
+			"lname": "James",
+			"walletBalance": 12500
+		},
+
+		{
+			"id":"dfg",
+			"fname": "Erin",
+			"lname": "James",
+			"walletBalance": 12500
+		},
+		{
+			"id":"ome",
+			"fname": "bud",
+			"lname": "Sola",
+			"walletBalance": 34500
+		}
 	]
 
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -85,19 +85,54 @@ const Modal = ({ children }) => {
   return createPortal(<ModalWrapper>{children}</ModalWrapper>, elRef.current);
 };
 
-const ModalComponent = ({ show, handlePreview }) => {
+const ModalComponent = ({ show, handlePreview, doTransfer, transferInfo, showPreview }) => {
+  const modalRef = useRef(null);
+
+  //   const handleClick = useCallback(
+  //     (e) => {
+  //       if (modalRef.current.contains(e.target)) {
+  //         return;
+  //       }
+  //       if (modalRef.current && !modalRef.current.contains(e.target)) {
+  //         handlePreview(false);
+  //       }
+  //     },
+  //     [showPreview]
+  //   );
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (modalRef.current.contains(e.target)) {
+        console.log(e, 'hey');
+        return;
+      }
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        console.log(e, 'hi');
+        handlePreview(false);
+      }
+    };
+    if (showPreview) {
+      document.addEventListener('mousedown', handleClick);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, [showPreview, handlePreview]);
+
   if (!show) return null;
   return (
     <Modal>
       <Wrapper>
-        <Container>
-          <h2>You are about to send 20,000 to Jane ricker</h2>
+        <Container ref={modalRef}>
+          <h2>
+            You are about to send &#36;{transferInfo.amount} to {transferInfo.recipient}
+          </h2>
 
           <div>
             <button onClick={() => handlePreview(false)} className="cancel">
               Cancel
             </button>
-            <button>Send</button>
+            <button onClick={() => doTransfer()}>Send</button>
           </div>
         </Container>
       </Wrapper>
@@ -107,7 +142,10 @@ const ModalComponent = ({ show, handlePreview }) => {
 
 ModalComponent.propTypes = {
   show: PropTypes.bool,
-  handlePreview: PropTypes.func
+  handlePreview: PropTypes.func,
+  doTransfer: PropTypes.func,
+  transferInfo: PropTypes.object,
+  showPreview: PropTypes.bool
 };
 
 export default ModalComponent;

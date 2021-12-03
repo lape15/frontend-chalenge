@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import DialogBox from '../component/dialog_box';
 import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
@@ -12,6 +11,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-bottom: 50px;
 `;
 
 export const InfoBox = styled.div`
@@ -104,6 +104,14 @@ const WalletPage = () => {
     setTransferFund(value);
   };
   const roundedBalance = String(balance).split('');
+
+  const deductBalance = (amount) => {
+    setUser({
+      ...user,
+      walletBalance: user.walletBalance - amount
+    });
+  };
+
   return (
     <Main>
       <WalletHeader firstName={user.fname} lastName={user.lname} />
@@ -119,7 +127,7 @@ const WalletPage = () => {
           <button onClick={() => showTransferForm(true)}>Transfer funds</button>
         </BalanceBox>
       </InfoBox>
-      {transferFund && <Form showTransferForm={showTransferForm} />}
+      {transferFund && <Form showTransferForm={showTransferForm} deductBalance={deductBalance} />}
     </Main>
   );
 };
