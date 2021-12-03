@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import DialogBox from '../component/dialog_box';
 import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
@@ -99,15 +100,14 @@ const WalletPage = () => {
     }
   }, [users]);
 
-  const showTransferForm = () => {
-    setTransferFund(true);
+  const showTransferForm = (value) => {
+    setTransferFund(value);
   };
   const roundedBalance = String(balance).split('');
   return (
     <Main>
       <WalletHeader firstName={user.fname} lastName={user.lname} />
       <InfoBox>
-        {console.log({ roundedBalance, users })}
         <h3 className="main_head">Wallet</h3>
         <BalanceBox>
           <Text>Available Balance:</Text>
@@ -116,10 +116,10 @@ const WalletPage = () => {
             <Tooltip amount={user.walletBalance} />
           </h3>
 
-          <button onClick={showTransferForm}>Transfer funds</button>
+          <button onClick={() => showTransferForm(true)}>Transfer funds</button>
         </BalanceBox>
       </InfoBox>
-      {transferFund && <Form />}
+      {transferFund && <Form showTransferForm={showTransferForm} />}
     </Main>
   );
 };
