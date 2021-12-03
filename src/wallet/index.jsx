@@ -29,6 +29,7 @@ export const InfoBox = styled.div`
   }
   @media (max-width: 576px) {
     padding: 10px;
+    font-size: 14px;
   }
 `;
 
