@@ -122,13 +122,13 @@ const WalletPage = () => {
           <Text>Available Balance:</Text>
           <h3>
             &#36;
-            {roundedBalance.length ? `${roundedBalance[0]}${roundedBalance[1]}` : 0}
+            {roundedBalance.length > 0 ? `${roundedBalance[0]}${roundedBalance[1]}` : 0}
             k
-            <Tooltip amount={user.walletBalance} />
+            <Tooltip amount={user.walletBalance ?? 0} />
           </h3>
 
           <button onClick={() => showTransferForm(true)} disabled={transferFund}>
-            Transfer funds
+            Transfer
           </button>
         </BalanceBox>
       </InfoBox>
