@@ -16,4 +16,4 @@ Run vite dev server with command
 
 yarn dev
 
-[Link to app](https://kudifrontend-challenge.netlify.app/)
+[Link to APP](https://kudifrontend-challenge.netlify.app/)

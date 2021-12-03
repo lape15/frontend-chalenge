@@ -37,8 +37,8 @@ const NameWrapper = styled.div`
 
 const WalletHeader = (props) => {
   const { firstName, lastName } = props;
-  // const first = firstName && firstName?.split('');
-  // const last = lastName && lastName.split('');
+  const first = firstName && firstName.split('');
+  const last = lastName && lastName.split('');
 
   return (
     <Header>
@@ -46,11 +46,14 @@ const WalletHeader = (props) => {
         <Logo />
       </a>
       <NameWrapper>
-        <div className="short">
-          {/* {first[0]}
-          {last[0]} */}
-          JD
-        </div>
+        {firstName && lastName && (
+          <div className="short">
+            {first[0]}
+            {last[0]}
+            {/* JD */}
+          </div>
+        )}
+
         <div>
           {firstName} {lastName}
         </div>
