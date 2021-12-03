@@ -116,20 +116,10 @@ const Empty = styled.div`
   }
 `;
 
-const getLocalUsers = () => {
-  let members;
-  if (localStorage.users) {
-    members = localStorage.getItem('users');
-  }
-  members = JSON.parse(members);
-
-  return members;
-};
-
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(doFetchUsers(getLocalUsers())), [dispatch]);
+  useEffect(() => dispatch(doFetchUsers()), [dispatch]);
 
   const [user, setUser] = useState({});
   const [transferFund, setTransferFund] = useState(false);

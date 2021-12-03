@@ -139,16 +139,7 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
       <FormWrapper onSubmit={handleTransferSubmit}>
         <DialogBox />
         {error && <p className="error">{error}</p>}
-        <Label>
-          <span>Amount</span>
-          <input
-            type="number"
-            value={transferInfo.amount}
-            name="amount"
-            onChange={handleInfoChange}
-            required
-          />
-        </Label>
+
         <Label>
           <span>Currency</span>
           <select
@@ -164,6 +155,18 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
             ))}
           </select>
         </Label>
+
+        <Label>
+          <span>Amount</span>
+          <input
+            type="number"
+            value={transferInfo.amount}
+            name="amount"
+            onChange={handleInfoChange}
+            required
+          />
+        </Label>
+
         <Label>
           <span>Recipient</span>
           <select
