@@ -86,6 +86,35 @@ export const Text = styled.div`
   font-size: 0.8rem;
   position: relative;
 `;
+const Empty = styled.div`
+  width: 300px;
+  padding: 20px;
+  position: relative;
+  margin: 10% auto;
+  background: white;
+  border: 1px solid #00e59e;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 25px rgba(196, 196, 196, 0.25);
+  height: 130px;
+  box-shadow: 0px 4px 25px rgba(196, 196, 196, 0.25);
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+  & p {
+    font-size: 1.3rem;
+    text-transform: capitalize;
+  }
+  @media (max-width: 768px) {
+    margin: 30% auto;
+  }
+  @media (max-width: 576px) {
+    width: 70%;
+  }
+`;
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
@@ -132,12 +161,16 @@ const WalletPage = () => {
           </button>
         </BalanceBox>
       </InfoBox>
-      {transferFund && (
+      {transferFund ? (
         <Form
           showTransferForm={showTransferForm}
           deductBalance={deductBalance}
           balance={user.walletBalance}
         />
+      ) : (
+        <Empty onClick={() => showTransferForm(true)}>
+          <p>Click to transfer funds</p>
+        </Empty>
       )}
     </Main>
   );
