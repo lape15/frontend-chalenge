@@ -121,7 +121,9 @@ const WalletPage = () => {
         <BalanceBox>
           <Text>Available Balance:</Text>
           <h3>
-            &#36;{`${roundedBalance[0]}${roundedBalance[1]}`}k
+            &#36;
+            {roundedBalance.length ? `${roundedBalance[0]}${roundedBalance[1]}` : 0}
+            k
             <Tooltip amount={user.walletBalance} />
           </h3>
 

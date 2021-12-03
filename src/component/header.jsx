@@ -46,12 +46,14 @@ const WalletHeader = (props) => {
         <Logo />
       </a>
       <NameWrapper>
-        {firstName && lastName && (
+        {firstName && lastName ? (
           <div className="short">
             {first[0]}
             {last[0]}
             {/* JD */}
           </div>
+        ) : (
+          <div className="short">N/A</div>
         )}
 
         <div>

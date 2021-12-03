@@ -21,3 +21,7 @@ yarn dev
 <!--- Assumptions made -->
 
 I assumed that the currency transffered will be debited from balance in dollars.
+
+<!--- Limitations -->
+
+json- server cannot be accessed by mobile phones and device outside of connected Wifi network.
