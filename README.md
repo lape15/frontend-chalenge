@@ -2,15 +2,7 @@ To run project dev dependecies must be installed
 
 <!--- To Install dependecies: -->
 
-run yarn
-
-Command to install json_server globally:
-
-yarn global add json-server
-
-Run json server with command after global installation
-
-json-server --watch db.json --port 3004
+run yarn to install dependecies
 
 Run vite dev server with command
 
@@ -22,6 +14,6 @@ yarn dev
 
 I assumed that the currency transffered will be debited from balance in dollars.
 
-<!--- Limitations -->
+<!--- Storage-->
 
-json- server cannot be accessed by mobile phones and device outside of connected Wifi network.
+Local storage is used to store members data

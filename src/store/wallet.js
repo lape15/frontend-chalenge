@@ -29,11 +29,8 @@ export const doSaveCurrency = (symbol) => (dispatch) => {
   dispatch(saveCurrency(symbol));
 };
 
-export const doFetchUsers = () => (dispatch) => {
-  fetch('http://localhost:3004/users')
-    .then((data) => data.json())
-    .then((response) => dispatch(fetchUsers(response)))
-    .catch((error) => console.error('Error', error));
+export const doFetchUsers = (users) => (dispatch) => {
+  dispatch(fetchUsers(users.users));
 };
 
 export const doFetchConversionRate = () => (dispatch) => {

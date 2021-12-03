@@ -27,7 +27,7 @@ export const InfoBox = styled.div`
     font-weight: 700;
     padding: 2px 0.75rem;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     padding: 10px;
     font-size: 14px;
   }
@@ -58,7 +58,7 @@ export const BalanceBox = styled.div`
     color: #18379a;
     text-transform: capitalize;
     border-radius: 2.78em;
-    min-width: 10.71em;
+    min-width: 70px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -115,17 +115,27 @@ const Empty = styled.div`
     width: 70%;
   }
 `;
+
+const getLocalUsers = () => {
+  let members;
+  if (localStorage.users) {
+    members = localStorage.getItem('users');
+  }
+  members = JSON.parse(members);
+
+  return members;
+};
+
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(doFetchUsers()), [dispatch]);
+  useEffect(() => dispatch(doFetchUsers(getLocalUsers())), [dispatch]);
+
   const [user, setUser] = useState({});
-  const [balance, setBalance] = useState(0);
   const [transferFund, setTransferFund] = useState(false);
 
   useEffect(() => {
-    if (users.length) {
-      setBalance(users[0].walletBalance);
+    if (users.length > 0) {
       setUser(users[0]);
     }
   }, [users]);
@@ -133,7 +143,7 @@ const WalletPage = () => {
   const showTransferForm = (value) => {
     setTransferFund(value);
   };
-  const roundedBalance = String(balance).split('');
+  const roundedBalance = String(user.walletBalance).split('');
 
   const deductBalance = (amount) => {
     setUser({

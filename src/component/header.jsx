@@ -11,6 +11,9 @@ const Header = styled.header`
   box-shadow: 4px 6px 50px rgba(0, 0, 0, 0.1);
   height: 80px;
   align-items: center;
+  & a.logo {
+    width: auto;
+  }
 `;
 const NameWrapper = styled.div`
   display: flex;
@@ -42,7 +45,7 @@ const WalletHeader = (props) => {
 
   return (
     <Header>
-      <a>
+      <a className="logo">
         <Logo />
       </a>
       <NameWrapper>
