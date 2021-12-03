@@ -15,3 +15,5 @@ json-server --watch db.json --port 3004
 Run vite dev server with command
 
 yarn dev
+
+[Link to app](https://kudifrontend-challenge.netlify.app/)
