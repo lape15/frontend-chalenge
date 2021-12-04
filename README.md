@@ -17,3 +17,8 @@ I assumed that the currency transffered will be debited from balance in dollars.
 <!--- Storage-->
 
 Local storage is used to store members data
+
+<!--- Tests-->
+
+Run yarn run jest to run test suites
+Individuat test file can be ran with npx file name
