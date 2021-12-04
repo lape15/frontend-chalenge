@@ -134,9 +134,13 @@ const Container = styled.div`
   }
 `;
 const getRoundedBal = (arr) => {
+  if (arr.length === 4) return `${arr[0]}k`;
   if (arr.length === 5) return `${arr[0]}${arr[1]}k`;
   if (arr.length === 6) return `${arr[0]}${arr[1]}${arr[2]}k`;
-  return '0';
+  if (arr.length)
+    if (!arr.length) {
+      return '0';
+    }
 };
 
 const WalletPage = () => {
