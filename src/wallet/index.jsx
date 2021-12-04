@@ -87,6 +87,7 @@ export const Text = styled.div`
   font-size: 0.8rem;
   position: relative;
 `;
+
 const Empty = styled.div`
   width: 300px;
   padding: 20px;
@@ -133,6 +134,7 @@ const Container = styled.div`
     }
   }
 `;
+
 const getRoundedBal = (arr) => {
   if (arr.length === 4) return `${arr[0]}k`;
   if (arr.length === 5) return `${arr[0]}${arr[1]}k`;
