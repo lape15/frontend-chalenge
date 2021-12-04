@@ -133,6 +133,11 @@ const Container = styled.div`
     }
   }
 `;
+const getRoundedBal = (arr) => {
+  if (arr.length === 5) return `${arr[0]}${arr[1]}k`;
+  if (arr.length === 6) return `${arr[0]}${arr[1]}${arr[2]}k`;
+  return '0';
+};
 
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
@@ -168,9 +173,7 @@ const WalletPage = () => {
         <BalanceBox>
           <Text>Available Balance:</Text>
           <h3>
-            &#36;
-            {roundedBalance.length > 0 ? `${roundedBalance[0]}${roundedBalance[1]}` : 0}
-            k
+            {getRoundedBal(roundedBalance)}
             <Tooltip amount={user.walletBalance ?? 0} />
           </h3>
 

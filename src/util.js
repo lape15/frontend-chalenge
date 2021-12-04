@@ -7,7 +7,7 @@ const users = {
 
       lname: 'Doe',
 
-      walletBalance: 38999
+      walletBalance: 389990
     },
 
     {

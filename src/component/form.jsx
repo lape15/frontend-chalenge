@@ -27,11 +27,12 @@ const FormWrapper = styled.form`
   }
   @media (max-width: 768px) {
     width: 500px;
-    top: 2vh;
+    top: 5vh;
   }
   @media (max-width: 576px) {
     width: 100%;
     margin: 0;
+    top: 17vh;
   }
 `;
 

@@ -38,6 +38,9 @@ const ToolTipWrapper = styled.div`
     border-radius: 1px 0px 0px 0px;
     box-shadow: -1px -1px 0 0 rgba(0, 149, 186, 0.3);
   }
+  @media (max-width: 576px) {
+  left:-20px;
+  }
 `;
 
 export const Text = styled.div`
