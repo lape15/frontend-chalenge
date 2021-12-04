@@ -31,10 +31,14 @@ export const doSaveCurrency = (symbol) => (dispatch) => {
 
 const getLocalUsers = async () => {
   let members;
-  if (localStorage.users) {
-    members = await localStorage.getItem('users');
+  try {
+    if (localStorage.users) {
+      members = await localStorage.getItem('users');
+    }
+    members = JSON.parse(members);
+  } catch (error) {
+    console.error('there is an error here', error);
   }
-  members = JSON.parse(members);
 
   return members;
 };

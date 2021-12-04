@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -39,7 +40,7 @@ const ToolTipWrapper = styled.div`
     box-shadow: -1px -1px 0 0 rgba(0, 149, 186, 0.3);
   }
   @media (max-width: 576px) {
-  left:-20px;
+    left: -20px;
   }
 `;
 

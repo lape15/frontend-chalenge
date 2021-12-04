@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "yarn run jest -env=jsdom"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -12,18 +13,78 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-redux": "^7.2.6",
+    "redux-mock-store": "^1.5.4",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-syntax-jsx": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@testing-library/dom": "^8.11.1",
+    "@testing-library/jest-dom": "^5.16.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "@vitejs/plugin-react": "^1.0.0",
+    "babel-jest": "^27.4.2",
+    "babel-preset-react-app": "^10.0.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.3",
+    "jest-circus": "^27.4.2",
+    "jest-scss-transform": "^1.0.1",
+    "jest-watch-typeahead": "^1.0.0",
     "prettier": "^2.5.0",
     "vite": "^2.6.4"
   },
   "lint": "eslint .",
   "lint:fix": "eslint --fix",
-  "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+  "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest/mocks/jest.setup.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.scss$": "jest-scss-transform",
+      "^.+\\.css$": "<rootDir>/jest/mocks/cssMock.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/mocks/fileMock.js"
+    },
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ],
+    "resetMocks": true
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          "react-app"
+        ]
+      }
+    }
+  }
 }
