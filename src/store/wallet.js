@@ -29,22 +29,7 @@ export const doSaveCurrency = (symbol) => (dispatch) => {
   dispatch(saveCurrency(symbol));
 };
 
-const getLocalUsers = async () => {
-  let members;
-  try {
-    if (localStorage.users) {
-      members = await localStorage.getItem('users');
-    }
-    members = JSON.parse(members);
-  } catch (error) {
-    console.error('there is an error here', error);
-  }
-
-  return members;
-};
-
-export const doFetchUsers = () => async (dispatch) => {
-  const users = await getLocalUsers();
+export const doFetchUsers = (users) => async (dispatch) => {
   dispatch(fetchUsers(users.users));
 };
 

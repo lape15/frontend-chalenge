@@ -6,6 +6,7 @@ import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/wallet';
 import illus from '../assets/illus.jpg';
+import members from '../util'
 
 const Main = styled.main`
   width: 100%;
@@ -148,7 +149,6 @@ const getRoundedBal = (arr) => {
 const WalletPage = () => {
   const users = useSelector((state) => state.wallet.users);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(doFetchUsers()), [dispatch]);
 
   const [user, setUser] = useState({});
   const [transferFund, setTransferFund] = useState(false);
@@ -158,6 +158,10 @@ const WalletPage = () => {
       setUser(users[0]);
     }
   }, [users]);
+
+  useEffect(() => {
+    dispatch(doFetchUsers(members));
+  }, [dispatch]);
 
   const showTransferForm = (value) => {
     setTransferFund(value);

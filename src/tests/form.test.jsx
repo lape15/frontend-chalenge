@@ -1,48 +1,44 @@
-/**
- * @jest-environment jsdom
- */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import Form from '../component/form';
 import * as redux from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import App from '../App';
+import users from '../util';
 
-describe('App  component tests', () => {
+describe('Form Component test here', () => {
   let spyOnUseSelector;
   //   let spyOnUseDispatch;
   //   let mockDispatch;
 
   const initialState = {
-    users: [],
+    users: [...users.users],
     currency: '',
     conversionRate: null
   };
   const mockStore = configureStore([thunk]);
   let store;
   store = mockStore(initialState);
-
   beforeEach(() => {
-    // Object.defineProperty(window, 'localStorage', {
-    //   value: {
-    //     getItem: jest.fn(() => null),
-    //     setItem: jest.fn(() => null)
-    //   },
-    //   writable: true
-    // });
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => null),
+        setItem: jest.fn(() => null)
+      },
+      writable: true
+    });
     // Mock useSelector hook
     spyOnUseSelector = jest.spyOn(redux, 'useSelector');
     spyOnUseSelector.mockReturnValue(initialState);
   });
 
-  it('renders wallet page', () => {
+  it('renders form component', () => {
     render(
       <redux.Provider store={store}>
-        <App />
+        <Form />
       </redux.Provider>
     );
-    const walletElement = screen.getByText(/Wallet/i);
-    // expect(window.localStorage.getItem).toHaveBeenCalledTimes(1);
-    expect(walletElement).toBeInTheDocument();
+    const form = screen.getByText(/Currency/);
+    expect(form).toBeInTheDocument();
   });
 });
