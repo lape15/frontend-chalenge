@@ -22,4 +22,4 @@ Local storage is used to store members data
 
 test suites
 yarn run jest
-Individuat test file can be ran with npx jest test file name
+Individuat test file can be ran with npx jest file name

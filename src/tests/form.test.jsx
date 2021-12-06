@@ -30,6 +30,7 @@ describe('Form Component test here', () => {
     // Mock useSelector hook
     spyOnUseSelector = jest.spyOn(redux, 'useSelector');
     spyOnUseSelector.mockReturnValue(initialState);
+    spyOnUseSelector.mockReturnValue(users.users);
   });
 
   it('renders form component', () => {

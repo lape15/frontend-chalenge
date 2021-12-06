@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -111,6 +111,7 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
   const handlePreview = (value) => {
     setShowPreview(value);
   };
+
   const handleTransferSubmit = (e) => {
     e.preventDefault();
     const infoKeys = Object.keys(transferInfo);
