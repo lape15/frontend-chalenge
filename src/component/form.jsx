@@ -86,8 +86,10 @@ const info = {
 const Form = ({ showTransferForm, deductBalance, balance }) => {
   const users = useSelector((state) => state.wallet.users);
   const [transferInfo, setTransferInfo] = useState(info);
-
+  const conversionRate = useSelector((state) => state.wallet.conversionRate);
+  const currency = useSelector((state) => state.wallet.currency);
   const [showPreview, setShowPreview] = useState(false);
+
   const [error, setError] = useState('');
 
   const recipients = users.slice(1, users.length);
@@ -121,8 +123,12 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
         setError('Field cannot be empty');
         return;
       }
-      if (transferInfo['amount'] >= balance) {
+      if (transferInfo['amount'] > balance) {
         setError('Amount cannot be greater than balance');
+        return;
+      }
+      if (transferInfo['amount'] < 0) {
+        setError('Amount is invalid');
         return;
       }
     }
@@ -134,7 +140,7 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
   };
 
   const doTransfer = () => {
-    deductBalance(Number(transferInfo.amount));
+    deductBalance(Number(transferInfo.amount) * Number(conversionRate[currency]));
     resetTransferInfo();
     setShowPreview(false);
   };
