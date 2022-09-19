@@ -5,8 +5,8 @@ import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/wallet';
-import illus from '../assets/illus.jpg';
-import members from '../util'
+import { motion } from 'framer-motion';
+import members from '../util';
 
 const Main = styled.main`
   width: 100%;
@@ -93,7 +93,6 @@ const Empty = styled.div`
   width: 300px;
   padding: 20px;
   position: relative;
-  top: 20vh;
   margin: 0 auto;
   background: white;
   border: 1px solid #00e59e;
@@ -123,8 +122,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   position: relative;
-  top: 10vh;
+  height: 100%;
+  padding: 20px 5px;
+  justify-content: center;
   margin: 0 auto;
+  align-items: center;
   & .image {
     width: 450px;
     img {
@@ -200,13 +202,15 @@ const WalletPage = () => {
             balance={user.walletBalance}
           />
         ) : (
-          <Empty onClick={() => showTransferForm(true)}>
+          <Empty
+            onClick={() => showTransferForm(true)}
+            as={motion.div}
+            initial={{  scale: 0.5 }}
+            animate={{  scale: 1 }}
+            transition={{ duration: 0.8 }}>
             <p>Click to transfer funds</p>
           </Empty>
         )}
-        <div className="image">
-          <img src={illus} alt="photo" />
-        </div>
       </Container>
     </Main>
   );

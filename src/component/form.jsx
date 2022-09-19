@@ -5,20 +5,20 @@ import styled from 'styled-components';
 import { doFetchConversionRate, doSaveCurrency } from '../store/wallet';
 import DialogBox from './dialog_box';
 import ModalComponent from './modal';
+import { motion } from 'framer-motion';
 
 const currencies = ['NGN', 'USD', 'EUR'];
 
 const FormWrapper = styled.form`
-  width: 550px;
+  width: 400px;
   background: white;
   border-radius: 6px;
   display: flex;
   flex-flow: column nowrap;
   padding: 20px;
   position: relative;
-  top: 8vh;
+
   margin: 0;
-  margin-left: 15%;
   box-shadow: 0px 4px 25px rgba(196, 196, 196, 0.25);
   & .error {
     margin: 10px;
@@ -32,7 +32,6 @@ const FormWrapper = styled.form`
   @media (max-width: 576px) {
     width: 100%;
     margin: 0;
-    top: 17vh;
   }
 `;
 
@@ -147,7 +146,13 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
 
   return (
     <>
-      <FormWrapper onSubmit={handleTransferSubmit}>
+      <FormWrapper
+        onSubmit={handleTransferSubmit}
+        as={motion.form}
+        initial={{ y: -150 }}
+        animate={{ y: 10 }}
+        transition={{ duration: 1 }}
+        key={'form_id'}>
         <DialogBox />
         {error && <p className="error">{error}</p>}
 
