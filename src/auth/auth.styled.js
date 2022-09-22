@@ -111,3 +111,16 @@ export const Ball = styled.div`
   background: #8057d9;
   border-radius: 50%;
 `;
+
+export const OtherWrapper = styled.div`
+  margin-block-start: 15px;
+
+  & a {
+    font-size: 16px;
+    color: #8057d9;
+  }
+`;
+export const Other = styled.p`
+  font-size: 16px;
+  color: #686f7d;
+`;

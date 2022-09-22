@@ -149,15 +149,16 @@ const getRoundedBal = (arr) => {
 };
 
 const WalletPage = () => {
-  const users = useSelector((state) => state.wallet.users);
+  const users = useSelector((state) => state.user.user);
+  console.log(users,'ymmmm')
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({});
   const [transferFund, setTransferFund] = useState(false);
 
   useEffect(() => {
-    if (users.length > 0) {
-      setUser(users[0]);
+    if (users !== null) {
+      setUser(users);
     }
   }, [users]);
 
@@ -168,7 +169,7 @@ const WalletPage = () => {
   const showTransferForm = (value) => {
     setTransferFund(value);
   };
-  const roundedBalance = String(user.walletBalance).split('');
+  // const roundedBalance = String(user.walletBalance).split('');
 
   const deductBalance = (amount) => {
     setUser({
@@ -179,13 +180,13 @@ const WalletPage = () => {
 
   return (
     <Main>
-      <WalletHeader firstName={user.fname} lastName={user.lname} />
+      <WalletHeader firstName={user.firstName} lastName={user.lastName} />
       <InfoBox>
         <h3 className="main_head">Wallet</h3>
         <BalanceBox>
           <Text>Available Balance:</Text>
           <h3>
-            {getRoundedBal(roundedBalance)}
+            {/* {getRoundedBal(roundedBalance)} */}
             <Tooltip amount={user.walletBalance ?? 0} />
           </h3>
 

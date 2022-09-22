@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import AuthService from '../services/auth.service';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SessionService } from '../services/session.service';
 import { useDispatch } from 'react-redux';
 import {
@@ -15,8 +15,11 @@ import {
   GoogleBtn,
   Input,
   Label,
-  Main
+  Other,
+  OtherWrapper
 } from './auth.styled';
+
+import { doSetUser } from '../store/user';
 
 const userObj = {
   firstName: '',
@@ -60,7 +63,7 @@ const SignUp = () => {
       const data = await AuthService.createNewUser(user);
       if (data.data.token) {
         SessionService.saveSession(data.data.token);
-        dispatch(setUser(data.data.data));
+        dispatch(doSetUser(data.data.data));
         navigate('/dashboard');
       } else {
         setErrors((prevErr) => ({ ...prevErr, isUnique: false }));
@@ -69,6 +72,15 @@ const SignUp = () => {
       console.log(error, 'ERRROR RE OHHHH');
     }
   };
+  const signUpwithGoogle = async () => {
+    // try {
+    //   ApiService.get('google');
+    // } catch (err) {
+    //   console.log(err,'EER');
+    // }
+    window.open(`${import.meta.env.VITE_CONNECT_API}login/federated/google`);
+  };
+
   return (
     <AuthCon>
       <Col>
@@ -114,10 +126,17 @@ const SignUp = () => {
             />
           </Label>
           <BtnCon>
-            <Btn>Sign in</Btn>
-            <GoogleBtn>Sign in with Google</GoogleBtn>
+            <Btn type="submit">Sign up</Btn>
+            <GoogleBtn type="button" onClick={signUpwithGoogle}>
+              Sign up with Google
+            </GoogleBtn>
           </BtnCon>
         </Form>
+        <OtherWrapper>
+          <Other>
+            Already have an account?&nbsp; <Link to="login">Sign in</Link>
+          </Other>
+        </OtherWrapper>
       </Col>
       <Col2>
         <Ball
