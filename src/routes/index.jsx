@@ -3,6 +3,8 @@ import WalletPage from '../wallet';
 import ProtectedRoute from './protected';
 import { useSelector } from 'react-redux';
 import { AuthIndex } from '../auth';
+import { useEffect, useState } from 'react';
+import { SessionService } from '../services/session.service';
 
 const protectedRoutes = [
   {
@@ -12,19 +14,24 @@ const protectedRoutes = [
 ];
 
 const RoutesConfig = () => {
-  const user = useSelector((state) => state.user.user);
+  const userObj = useSelector((state) => state.user.user);
+  const [user, setUser] = useState(SessionService.getSession());
+
+
+  useEffect(() => {
+    setUser(SessionService.getSession());
+  }, [userObj]);
+
   return (
     <Routes>
       <Route index element={<AuthIndex />} path="/*" />
-
-      {/* <Route index element={<SignUp />} />
-      <Route path="login" element={<Login />} /> */}
+      {console.log(window.history, 'HISTORY')}
       {protectedRoutes.map((route, index) => (
         <Route
           key={index}
           path={route.path}
           element={
-            <ProtectedRoute redirectPath={'/'} allowed={user !== null}>
+            <ProtectedRoute redirectPath={'/login'} allowed={user ? true : false}>
               {route.element}
             </ProtectedRoute>
           }

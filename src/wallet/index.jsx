@@ -7,6 +7,7 @@ import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/wallet';
 import { motion } from 'framer-motion';
 import members from '../util';
+import { fetchUserDetails } from '../store/user';
 
 const Main = styled.main`
   width: 100%;
@@ -150,7 +151,7 @@ const getRoundedBal = (arr) => {
 
 const WalletPage = () => {
   const users = useSelector((state) => state.user.user);
-  console.log(users,'ymmmm')
+  
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({});
@@ -164,17 +165,18 @@ const WalletPage = () => {
 
   useEffect(() => {
     dispatch(doFetchUsers(members));
+    dispatch(fetchUserDetails())
   }, [dispatch]);
 
   const showTransferForm = (value) => {
     setTransferFund(value);
   };
-  // const roundedBalance = String(user.walletBalance).split('');
+  const roundedBalance = String(user.balance).split('');
 
   const deductBalance = (amount) => {
     setUser({
       ...user,
-      walletBalance: user.walletBalance - amount
+      balance: user.balance - amount
     });
   };
 
@@ -186,8 +188,8 @@ const WalletPage = () => {
         <BalanceBox>
           <Text>Available Balance:</Text>
           <h3>
-            {/* {getRoundedBal(roundedBalance)} */}
-            <Tooltip amount={user.walletBalance ?? 0} />
+            {getRoundedBal(roundedBalance)}
+            <Tooltip amount={user.balance ?? 0} />
           </h3>
 
           <button onClick={() => showTransferForm(true)} disabled={transferFund}>

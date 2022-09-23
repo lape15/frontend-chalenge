@@ -4,7 +4,7 @@ import AuthService from '../services/auth.service';
 import { Link, useNavigate } from 'react-router-dom';
 import { SessionService } from '../services/session.service';
 import { useDispatch } from 'react-redux';
-import { doSetUser } from '../store/user';
+import { doSetUser, fetchUserDetails } from '../store/user';
 import {
   AuthCon,
   Ball,
@@ -19,6 +19,7 @@ import {
   Other,
   OtherWrapper
 } from './auth.styled';
+import UserService from '../services/user.service';
 
 const userObj = {
   email: '',
@@ -55,10 +56,9 @@ const Login = () => {
     }
     try {
       const data = await AuthService.signInUser(user);
-      console.log(data.data);
+
       if (data.data.token) {
         SessionService.saveSession(data.data.token);
-
         dispatch(doSetUser(data.data.data));
         navigate('/dashboard');
       } else {

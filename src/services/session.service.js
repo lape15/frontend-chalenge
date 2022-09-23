@@ -2,11 +2,11 @@ const ID_SESSION_KEY = 'id_session';
 
 export const SessionService = {
   getSession() {
-    return JSON.parse(window.localStorage.getItem(ID_SESSION_KEY) || '{}');
+    return window.localStorage.getItem(ID_SESSION_KEY);
   },
 
   saveSession(session) {
-    window.localStorage.setItem(ID_SESSION_KEY, JSON.stringify(session));
+    window.localStorage.setItem(ID_SESSION_KEY, session);
   },
 
   destroySession() {

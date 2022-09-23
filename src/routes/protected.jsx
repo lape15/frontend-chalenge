@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 const Container = styled.div``;
 
 const ProtectedRoute = (props) => {
-  const { allowed, redirectPath = '/', children } = props;
-console.log({allowed})
+  const { allowed, redirectPath, children } = props;
+
   if (!allowed) {
     return <Navigate to={redirectPath} replace />;
   }
