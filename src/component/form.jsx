@@ -84,14 +84,15 @@ const info = {
 };
 const Form = ({ showTransferForm, deductBalance, balance }) => {
   const users = useSelector((state) => state.wallet.users);
+  const user = useSelector((state) => state.user.user);
   const [transferInfo, setTransferInfo] = useState(info);
   const conversionRate = useSelector((state) => state.wallet.conversionRate);
   const currency = useSelector((state) => state.wallet.currency);
   const [showPreview, setShowPreview] = useState(false);
 
   const [error, setError] = useState('');
-
-  const recipients = users.slice(1, users.length);
+  const recipients = users.filter((usr) => usr.email !== user.email);
+  console.log({ users, user, recipients });
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(doFetchConversionRate()), [dispatch]);
@@ -191,9 +192,10 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
             onChange={handleInfoChange}
             required>
             <option defaultValue="Select recipient">Select recipient</option>
+
             {recipients.map((recipient) => (
-              <option value={`${recipient.fname} ${recipient.lname}`} key={recipient.id}>
-                {recipient.fname}
+              <option value={`${recipient.firstName} ${recipient.lastName}`} key={recipient.id}>
+                {recipient.firstName}&nbsp; {recipient.firstName}
               </option>
             ))}
           </select>

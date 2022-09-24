@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, batch } from 'react-redux';
 import styled from 'styled-components';
 import Form from '../component/form';
 import WalletHeader from '../component/header';
 import Tooltip from '../component/tooltip';
 import { doFetchUsers } from '../store/wallet';
 import { motion } from 'framer-motion';
-import members from '../util';
 import { fetchUserDetails } from '../store/user';
 
 const Main = styled.main`
@@ -151,9 +150,7 @@ const getRoundedBal = (arr) => {
 
 const WalletPage = () => {
   const users = useSelector((state) => state.user.user);
-  
   const dispatch = useDispatch();
-
   const [user, setUser] = useState({});
   const [transferFund, setTransferFund] = useState(false);
 
@@ -164,8 +161,10 @@ const WalletPage = () => {
   }, [users]);
 
   useEffect(() => {
-    dispatch(doFetchUsers(members));
-    dispatch(fetchUserDetails())
+    batch(() => {
+      dispatch(doFetchUsers());
+      dispatch(fetchUserDetails());
+    });
   }, [dispatch]);
 
   const showTransferForm = (value) => {
@@ -202,14 +201,14 @@ const WalletPage = () => {
           <Form
             showTransferForm={showTransferForm}
             deductBalance={deductBalance}
-            balance={user.walletBalance}
+            balance={user.balance}
           />
         ) : (
           <Empty
             onClick={() => showTransferForm(true)}
             as={motion.div}
-            initial={{  scale: 0.5 }}
-            animate={{  scale: 1 }}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.8 }}>
             <p>Click to transfer funds</p>
           </Empty>

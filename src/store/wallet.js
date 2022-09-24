@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import UsersService from '../services/users';
 // Slice
 const slice = createSlice({
   name: 'wallet',
@@ -29,8 +30,14 @@ export const doSaveCurrency = (symbol) => (dispatch) => {
   dispatch(saveCurrency(symbol));
 };
 
-export const doFetchUsers = (users) => async (dispatch) => {
-  dispatch(fetchUsers(users.users));
+export const doFetchUsers = () => async (dispatch) => {
+  try {
+    const data = await UsersService.getUsers();
+
+    dispatch(fetchUsers(data.data.data));
+  } catch (err) {
+    console.log(err, 'Error');
+  }
 };
 
 export const doFetchConversionRate = () => (dispatch) => {

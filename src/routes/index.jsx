@@ -17,7 +17,6 @@ const RoutesConfig = () => {
   const userObj = useSelector((state) => state.user.user);
   const [user, setUser] = useState(SessionService.getSession());
 
-
   useEffect(() => {
     setUser(SessionService.getSession());
   }, [userObj]);
@@ -25,7 +24,7 @@ const RoutesConfig = () => {
   return (
     <Routes>
       <Route index element={<AuthIndex />} path="/*" />
-      {console.log(window.history, 'HISTORY')}
+
       {protectedRoutes.map((route, index) => (
         <Route
           key={index}
