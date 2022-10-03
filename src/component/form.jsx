@@ -6,6 +6,7 @@ import { doFetchConversionRate, doSaveCurrency } from '../store/wallet';
 import DialogBox from './dialog_box';
 import ModalComponent from './modal';
 import { motion } from 'framer-motion';
+import TransactionService from '../services/transaction.service';
 
 const currencies = ['NGN', 'USD', 'EUR'];
 
@@ -92,7 +93,6 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
 
   const [error, setError] = useState('');
   const recipients = users.filter((usr) => usr.email !== user.email);
-  console.log({ users, user, recipients });
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(doFetchConversionRate()), [dispatch]);
@@ -123,10 +123,10 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
         setError('Field cannot be empty');
         return;
       }
-      if (transferInfo['amount'] > balance) {
-        setError('Amount cannot be greater than balance');
-        return;
-      }
+      // if (transferInfo['amount'] > balance) {
+      //   setError('Amount cannot be greater than balance');
+      //   return;
+      // }
       if (transferInfo['amount'] < 0) {
         setError('Amount is invalid');
         return;
@@ -139,10 +139,21 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
     setTransferInfo(info);
   };
 
-  const doTransfer = () => {
+  const doTransfer = async () => {
     deductBalance(Number(transferInfo.amount) * Number(conversionRate[currency]));
-    resetTransferInfo();
-    setShowPreview(false);
+
+    try {
+      const data = await TransactionService.makeTransactionr({
+        creditorId: user.id,
+        debitorId: transferInfo.recipient,
+        amount: Number(transferInfo.amount) * Number(conversionRate[currency])
+      });
+      console.log(data, 'DATATA');
+      resetTransferInfo();
+      // setShowPreview(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -194,7 +205,7 @@ const Form = ({ showTransferForm, deductBalance, balance }) => {
             <option defaultValue="Select recipient">Select recipient</option>
 
             {recipients.map((recipient) => (
-              <option value={`${recipient.firstName} ${recipient.lastName}`} key={recipient.id}>
+              <option value={`${recipient.id} ${recipient.lastName}`} key={recipient.id}>
                 {recipient.firstName}&nbsp; {recipient.firstName}
               </option>
             ))}

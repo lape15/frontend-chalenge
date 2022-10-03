@@ -122,7 +122,7 @@ const ModalComponent = ({ show, handlePreview, doTransfer, transferInfo }) => {
             <button onClick={() => handlePreview(false)} className="cancel">
               Cancel
             </button>
-            <button onClick={() => doTransfer()}>Send</button>
+            <button onClick={doTransfer}>Send</button>
           </div>
         </Container>
       </Wrapper>
